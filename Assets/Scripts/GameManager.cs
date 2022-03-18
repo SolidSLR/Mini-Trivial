@@ -50,36 +50,9 @@ public class GameManager : MonoBehaviour
 
             switch (webRequest.result)
             {
-                case UnityWebRequest.Result.ConnectionError:
-                case UnityWebRequest.Result.DataProcessingError:
-                    Debug.LogError(pages[page] + ": Error: " + webRequest.error);
-                    break;
-                case UnityWebRequest.Result.ProtocolError:
-                    Debug.LogError(pages[page] + ": HTTP Error: " + webRequest.error);
-                    break;
                 case UnityWebRequest.Result.Success:
-                    //Debug.Log(pages[page] + ":\nReceived: " + webRequest.downloadHandler.text);
 
                     trivia = JsonUtility.FromJson<Trivia>(webRequest.downloadHandler.text);
-
-                    //trivia.results = JsonUtility.FromJson<Questions>();
-
-                    //Debug.Log(trivia.response_code+" "+trivia.results[0].category);
-
-                    foreach (Questions item in trivia.results){
-
-                        Debug.Log("Categoría: "+item.category);
-                        Debug.Log("Tipo: "+item.type);
-                        Debug.Log("Dificultad: "+item.dificulty);
-                        Debug.Log("Pregunta: "+item.question);
-                        Debug.Log("Respuesta correcta: "+item.correct_answer);
-                        
-                        for(int i = 0; i < item.incorrect_answers.Count; i++){
-
-                            Debug.Log("Respuesta incorrecta "+(i+1)+": "+item.incorrect_answers[i]);
-
-                        }
-                    }
                     break;
             }
         }
